@@ -12,7 +12,7 @@ app.get('/', (req,res) => {
 });
 
 const connectWeather = async () => {
-
+    //api key
     const apiKey = process.env.WEATHER_API;
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=-33.447487&lon=-70.673676&appid=${apiKey}`;
 

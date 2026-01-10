@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex items-center justify-center min-h-screen">
+        <p id="weather-info" class="text-center text-2xl font-semibold text-gray-800">
+            waiting...
+        </p>
+    </div>
+
+    <script>
+
+        async function fetchWeather() {
+
+            try {
+
+                const response = await fetch('http://localhost:3003/api/weather');
+                const data = await response.json();
+
+                const paragraph = document.querySelector("#weather-info");
+
+                paragraph.textContent = `The wheater in ${data.location.name}`;
+
+            } catch (error) {
+                console.error('Error', error)
+                document.getElementById('weather-info').textContent = 'Failed to load weather';
+            }
+        }
+
+        fetchWeather()
+
+
+    </script>
+</body>
+</html>
+

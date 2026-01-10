@@ -1,29 +1,51 @@
-import express from "express";
-import dotenv from "dotenv";
-import axios from "axios";
+import dotenv from 'dotenv';
+import axios from 'axios';
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 const PORT = 3003;
 
-dotenv.config();
+dotenv.config()
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.get('/', (req,res) => {
-    res.send('Weather API server is running');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-const connectWeather = async () => {
-    //api key
-    const apiKey = process.env.WEATHER_API;
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=-33.447487&lon=-70.673676&appid=${apiKey}`;
+
+app.get('/api/weather', async (req,res) => {
+
+    const key = process.env.API_KEY;
+    const location = 'Santiago';
+    const url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}`;
 
     try {
-       const response = await axios.get(url);
-        console.log("WeatherAPI connected", response.data)
+        const response = await axios.get(url);
+        res.json(response.data);
     } catch (error) {
-        console.log("WeatherAPI failed to connect:", error.message);
+        console.log(error.message);
     }
-};
 
-await connectWeather()
 
-app.listen(PORT, () => console.log(`Server running o http://localhost:${PORT}`));
+});
+
+//const connectWheater = async () => {
+//
+//    const key = process.env.API_KEY;
+//    const location  = 'Santiago';
+//    const url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}`;
+//
+//    try {
+//        const response = await axios.get(url)
+//        console.log(response.data)
+//
+//    } catch (error) {
+//        console.log("Connection failed", error.message)
+//    }
+//};
+
+app.listen(PORT, () => console.log(`Server is running in http://localhost:${PORT}`));

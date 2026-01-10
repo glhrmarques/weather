@@ -11,6 +11,12 @@
         <p id="weather-info" class="text-center text-2xl font-semibold text-gray-800">
             waiting...
         </p>
+        <p id="condition-info">
+            waiting...
+        </p>
+        <p id="temp-c-info">
+            waiting...
+        </p>
     </div>
 
     <script>
@@ -23,12 +29,19 @@
                 const data = await response.json();
 
                 const paragraph = document.querySelector("#weather-info");
+                const condition = document.querySelector("#condition-info");
+                const tempC = document.querySelector("#temp-c-info");
+                
 
-                paragraph.textContent = `The wheater in ${data.location.name}`;
+                paragraph.textContent = `${data.location.name}`;
+                condition.textContent = `${data.current.condition.text}`;
+                tempC.textContent =`${data.current.temp_c}`;
 
             } catch (error) {
                 console.error('Error', error)
                 document.getElementById('weather-info').textContent = 'Failed to load weather';
+                document.getElementById('condition-info').textContent = 'Failed to load condition';
+                document.getElementById('temp-c-info').textContent = 'Failed to load temp c';
             }
         }
 

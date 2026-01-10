@@ -26,26 +26,12 @@ app.get('/api/weather', async (req,res) => {
     try {
         const response = await axios.get(url);
         res.json(response.data);
+        console.log(response.data);
     } catch (error) {
         console.log(error.message);
     }
 
 
 });
-
-//const connectWheater = async () => {
-//
-//    const key = process.env.API_KEY;
-//    const location  = 'Santiago';
-//    const url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}`;
-//
-//    try {
-//        const response = await axios.get(url)
-//        console.log(response.data)
-//
-//    } catch (error) {
-//        console.log("Connection failed", error.message)
-//    }
-//};
 
 app.listen(PORT, () => console.log(`Server is running in http://localhost:${PORT}`));

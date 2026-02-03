@@ -5,49 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Figtree', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex items-center justify-center min-h-screen">
-        <p id="weather-info" class="text-center text-2xl font-semibold text-gray-800">
-            waiting...
-        </p>
-        <p id="condition-info">
-            waiting...
-        </p>
-        <p id="temp-c-info">
-            waiting...
-        </p>
+<body class="bg-[#fbfbfb] overflow-hidden">
+    <div class="flex flex-col gap-10 px-4 pt-14 pb-4 h-screen">
+        <!-- Top Section -->
+        <div class="flex flex-col gap-8">
+            <!-- Logo/Icon -->
+            <img src="images/chile-flag.svg" alt="Chile Flag" class="w-[30px] h-[20px]">
+            
+            <!-- Weather Info -->
+            <div class="flex flex-col gap-1 items-start w-full">
+                <!-- Temperature -->
+                <p id="temp-c-info" class="text-[144px] leading-none font-normal text-black w-full">
+                    21°
+                </p>
+                
+                <!-- Location and Condition -->
+                <div class="flex gap-2.5 items-center justify-start w-full">
+                    <p id="weather-info" class="text-[28px] font-semibold text-black">
+                        Atacama
+                    </p>
+                    <div class="w-1 h-1 bg-black rounded-full"></div>
+                    <p id="condition-info" class="text-[24px] font-normal text-black">
+                        Sunny
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Image Gallery -->
+        <div class="flex-1 flex gap-4 overflow-x-auto">
+            <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=330&h=600&fit=crop" 
+                     alt="Landscape" 
+                     class="w-full h-full object-cover rounded-[56px]">
+            </div>
+            <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=330&h=600&fit=crop" 
+                     alt="Landscape" 
+                     class="w-full h-full object-cover rounded-[56px]">
+            </div>
+            <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=330&h=600&fit=crop" 
+                     alt="Landscape" 
+                     class="w-full h-full object-cover rounded-[56px]">
+            </div>
+        </div>
     </div>
 
     <script>
-
         async function fetchWeather() {
-
             try {
-
                 const response = await fetch('http://localhost:3003/api/weather');
                 const data = await response.json();
 
-                const paragraph = document.querySelector("#weather-info");
-                const condition = document.querySelector("#condition-info");
-                const tempC = document.querySelector("#temp-c-info");
+                const tempElement = document.querySelector("#temp-c-info");
+                const locationElement = document.querySelector("#weather-info");
+                const conditionElement = document.querySelector("#condition-info");
                 
-
-                paragraph.textContent = `${data.location.name}`;
-                condition.textContent = `${data.current.condition.text}`;
-                tempC.textContent =`${data.current.temp_c}`;
+                // Update with actual data
+                tempElement.textContent = `${data.current.temp_c}°`;
+                locationElement.textContent = data.location.name;
+                conditionElement.textContent = data.current.condition.text;
 
             } catch (error) {
-                console.error('Error', error)
-                document.getElementById('weather-info').textContent = 'Failed to load weather';
-                document.getElementById('condition-info').textContent = 'Failed to load condition';
-                document.getElementById('temp-c-info').textContent = 'Failed to load temp c';
+                console.error('Error', error);
+                document.getElementById('temp-c-info').textContent = '--°';
+                document.getElementById('weather-info').textContent = 'Location unavailable';
+                document.getElementById('condition-info').textContent = 'Condition unavailable';
             }
         }
 
-        fetchWeather()
-
-
+        fetchWeather();
     </script>
 </body>
 </html>

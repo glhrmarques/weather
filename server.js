@@ -20,7 +20,7 @@ app.get('/', (req,res) => {
 app.get('/api/weather', async (req,res) => {
 
     const key = process.env.API_KEY;
-    const location = 'Santiago';
+    const location = 'Atacama';
     const url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}`;
 
     try {

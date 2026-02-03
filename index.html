@@ -30,11 +30,11 @@
                 
                 <!-- Location and Condition -->
                 <div class="flex gap-2.5 items-center justify-start w-full">
-                    <p id="weather-info" class="text-[28px] font-semibold text-black">
+                    <p id="location-info" class="text-[18px] font-semibold text-black">
                         
                     </p>
                     <div class="w-1 h-1 bg-black rounded-full"></div>
-                    <p id="condition-info" class="text-[24px] font-normal text-black">
+                    <p id="condition-info" class="text-[18px] font-normal text-black">
                         
                     </p>
                 </div>
@@ -68,7 +68,7 @@
                 const data = await response.json();
 
                 const tempElement = document.querySelector("#temp-c-info");
-                const locationElement = document.querySelector("#weather-info");
+                const locationElement = document.querySelector("#location-info");
                 const conditionElement = document.querySelector("#condition-info");
                 
                 // Update with actual data

@@ -20,29 +20,65 @@
         .hide-scrollbar::-webkit-scrollbar {
             display: none;  /* Chrome, Safari, Opera */
         }
+        
+        /* Entrance animations */
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slide-left {
+            animation: slideInFromLeft 0.6s ease-out forwards;
+        }
+        
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
     </style>
 </head>
 <body class="bg-[#FBFBFB] overflow-hidden">
-    <div class="flex flex-col gap-10 px-4 pt-14 pb-4 mb-10 h-screen">
+    <div class="flex flex-col gap-10 px-4 pt-14 pb-10 h-screen">
         <!-- Top Section -->
         <div class="flex flex-col gap-8">
             <!-- Logo/Icon -->
-            <img src="images/chile-flag.svg" alt="Chile Flag" class="w-[44] h-[29px]">
+            <img src="images/chile-flag.svg" alt="Chile Flag" class="w-[44] h-[29px] self-start animate-slide-left">
             
             <!-- Weather Info -->
             <div class="flex flex-col gap-1 items-start w-full">
                 <!-- Temperature -->
-                <p id="temp-c-info" class="text-[144px] leading-none font-normal text-black w-full">
-                loading...
+                <p id="temp-c-info" class="text-[144px] leading-none font-normal text-black w-full animate-fade-up delay-1">
+                
                 </p>
                 
                 <!-- Location and Condition -->
-                <div class="flex gap-2.5 items-center justify-start w-full">
-                    <p id="location-info" class="text-[24px] font-semibold text-black">
+                <div class="flex gap-2.5 items-center justify-start w-full animate-fade-up delay-2">
+                    <p id="location-info" class="text-[28px] font-semibold text-black">
                         
                     </p>
                     <div class="w-1 h-1 bg-black rounded-full"></div>
-                    <p id="condition-info" class="text-[24px] font-normal text-black">
+                    <p id="condition-info" class="text-[28px] font-normal text-black">
                         
                     </p>
                 </div>
@@ -50,20 +86,35 @@
         </div>
         
         <!-- Image Gallery -->
-        <div class="flex-1 flex gap-4 overflow-x-auto hide-scrollbar">
+        <div class="flex-1 flex gap-4 overflow-x-auto hide-scrollbar animate-fade-up delay-3">
             <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=330&h=600&fit=crop" 
-                     alt="Landscape" 
+                <img src="images/atacama-01.avif" 
+                     alt="Atacama Desert" 
                      class="w-full h-full object-cover rounded-[56px]">
             </div>
             <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=330&h=600&fit=crop" 
-                     alt="Landscape" 
+                <img src="images/atacama-02.avif" 
+                     alt="Atacama Desert" 
                      class="w-full h-full object-cover rounded-[56px]">
             </div>
             <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=330&h=600&fit=crop" 
-                     alt="Landscape" 
+                <img src="images/atacama-03.avif" 
+                     alt="Atacama Desert" 
+                     class="w-full h-full object-cover rounded-[56px]">
+            </div>
+            <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
+                <img src="images/atacama-04.avif" 
+                     alt="Atacama Desert" 
+                     class="w-full h-full object-cover rounded-[56px]">
+            </div>
+            <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
+                <img src="images/atacama-05.avif" 
+                     alt="Atacama Desert" 
+                     class="w-full h-full object-cover rounded-[56px]">
+            </div>
+            <div class="h-full w-[330px] rounded-[56px] bg-gray-300 flex-shrink-0">
+                <img src="images/atacama-06.avif" 
+                     alt="Atacama Desert" 
                      class="w-full h-full object-cover rounded-[56px]">
             </div>
         </div>
